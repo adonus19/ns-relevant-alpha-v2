@@ -8,19 +8,19 @@ export class EventService {
     private loadedEvents: CalendarEvent[] = [
         {
             title: 'Baptisms', description: "Haven't been baptised? Now's the time!", date: new Date(new Date().getFullYear(), new Date().getMonth(), 0),
-            timeStart: new Date().getHours(), timeEnd: 1 + new Date().getHours(), location: 'YMCA Clover', imageUrl: './src/assets/cuban.jpg', id: '1'
+            timeStart: new Date().getHours(), timeEnd: 1 + new Date().getHours(), location: 'YMCA Clover', imageUrl: '~/assets/cuban.jpg', id: '1'
         },
         {
             title: "Men's Target Practice", description: "Hopefully you are better than these guys...", date: new Date(new Date().getFullYear(), new Date().getMonth(), 0),
-            timeStart: new Date().getHours(), timeEnd: 1 + new Date().getHours(), location: 'YMCA Clover', imageUrl: './src/assets/stormtrooper.jpg', id: '1'
+            timeStart: new Date().getHours(), timeEnd: 1 + new Date().getHours(), location: 'YMCA Clover', imageUrl: '~/assets/stormtrooper.jpg', id: '1'
         },
         {
             title: "Women's Bible Study", description: "Women that pray together stay together", date: new Date(new Date().getFullYear(), new Date().getMonth(), 0),
-            timeStart: new Date().getHours(), timeEnd: 1 + new Date().getHours(), location: 'YMCA Clover', imageUrl: './src/assets/letters.jpg', id: '1'
+            timeStart: new Date().getHours(), timeEnd: 1 + new Date().getHours(), location: 'YMCA Clover', imageUrl: '~/assets/letters.jpg', id: '1'
         },
         {
             title: 'Advance in the Mountains', description: "Need to fall back? Then push forward!", date: new Date(new Date().getFullYear(), new Date().getMonth(), 0),
-            timeStart: new Date().getHours(), timeEnd: 1 + new Date().getHours(), location: 'YMCA Clover', imageUrl: './src/assets/person.jpg', id: '1'
+            timeStart: new Date().getHours(), timeEnd: 1 + new Date().getHours(), location: 'YMCA Clover', imageUrl: '~/assets/person.jpg', id: '1'
         }
     ];
 

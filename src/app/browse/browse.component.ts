@@ -6,7 +6,8 @@ import { Subscription } from "rxjs";
 @Component({
     selector: "Browse",
     moduleId: module.id,
-    templateUrl: "./browse.component.html"
+    templateUrl: "./browse.component.html",
+    styleUrls: ['./browse.component.scss']
 })
 export class BrowseComponent implements OnInit, OnDestroy {
     currentEvents: CalendarEvent[];
