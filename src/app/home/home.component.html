@@ -1,0 +1,19 @@
+<ActionBar class="action-bar">
+    <Label class="action-bar-title" text="Home"></Label>
+</ActionBar>
+
+<GridLayout class="page page-content" tkExampleTitle tkToggleNavButton>
+    <RadListView [items]="sermons" marginRight="-2" backgroundColor="#e6e6e6" (itemLoading)="onItemLoading($event)">
+        <ListViewStaggeredLayout tkListViewLayout scrollDirection="Vertical" itemInsertAnimation="slide" spanCount="2">
+        </ListViewStaggeredLayout>
+        <ng-template tkListItemTemplate let-sermon="item">
+            <StackLayout margin="15" borderRadius="10" [nsRouterLink]="['../sermon', sermon.name]">
+                <Image src="{{ sermon.imageSrc }}" width="200" height="120" stretch="aspectFill"></Image>
+                <StackLayout backgroundColor="white" padding="10">
+                    <Label text="{{ sermon.name }}" class="item-name" textWrap="true"></Label>
+                    <Label text="{{ sermon.desc }}" class="item-desc" textWrap="true"></Label>
+                </StackLayout>
+            </StackLayout>
+        </ng-template>
+    </RadListView>
+</GridLayout>

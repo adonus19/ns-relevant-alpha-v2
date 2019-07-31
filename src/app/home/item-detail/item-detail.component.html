@@ -1,0 +1,23 @@
+<ActionBar class="action-bar">
+    <NavigationButton (tap)="onBackTap()" android.systemIcon="ic_menu_back"></NavigationButton>
+    <Label class="action-bar-title" [text]="item.name"></Label>
+</ActionBar>
+
+<!-- <StackLayout>
+    <Image [src]="item.imageSrc"></Image>
+    <Label [text]="item.desc"></Label>
+</StackLayout> -->
+<ScrollView>
+    <StackLayout>
+
+        <VideoPlayer id="nativeVideoPlayer" controls="true" autoplay="true" height="280"
+            src="https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4">
+        </VideoPlayer>
+        <Button class="btn btn-primary" text="Play" (tap)="play()"></Button>
+        <Button class="btn btn-primary" text="Pause" (tap)="pause()"></Button>
+        <Label [text]="item.desc"></Label>
+
+        <!-- Remote file to test with https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4 -->
+
+    </StackLayout>
+</ScrollView>
