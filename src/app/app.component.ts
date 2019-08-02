@@ -1,5 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewContainerRef } from "@angular/core";
 import { isAndroid } from "tns-core-modules/platform";
+import { UIService } from "./shared/ui.service";
 
 @Component({
     selector: "ns-app",
@@ -9,12 +10,12 @@ import { isAndroid } from "tns-core-modules/platform";
 })
 export class AppComponent implements OnInit {
 
-    constructor() {
+    constructor(private vcRef: ViewContainerRef, private uiService: UIService) {
         // Use the component constructor to inject providers.
     }
 
     ngOnInit(): void {
-        // this.eventService.fetchCurrentEvents()
+        this.uiService.setRootVCRef(this.vcRef);
     }
 
     getIconSource(icon: string): string {

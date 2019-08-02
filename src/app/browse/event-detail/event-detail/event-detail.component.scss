@@ -1,0 +1,42 @@
+/* Add mobile styles for the component here.  */
+
+FlexboxLayout {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  StackLayout {
+    background-color: transparentize(#494949, .2);
+    border-radius: 15px;
+    padding: 5 15;
+  }
+
+  Label {
+    width: 300;
+  }
+
+  .event-title {
+    font-size: 28;
+    font-weight: bold;
+  }
+}
+
+.btn {
+  border-radius: 25;
+  width: 50%;
+}
+// Label {
+//   width: 300;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   color: white;
+//   padding: 5;
+//   background-color: transparentize(#494949, .2);
+//   border-radius: 15px;
+
+// }
