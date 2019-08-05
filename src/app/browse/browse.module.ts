@@ -4,12 +4,14 @@ import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
 
 import { BrowseRoutingModule } from "./browse-routing.module";
 import { BrowseComponent } from "./browse.component";
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
     imports: [
         NativeScriptCommonModule,
         NativeScriptUIListViewModule,
-        BrowseRoutingModule
+        BrowseRoutingModule,
+        SharedModule
     ],
     declarations: [
         BrowseComponent

@@ -2,11 +2,12 @@ import { NgModule } from "@angular/core";
 import { Routes } from "@angular/router";
 import { NSEmptyOutletComponent } from "nativescript-angular";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
+import { GivingComponent } from "./giving/giving.component";
 
 const routes: Routes = [
     {
         path: "",
-        redirectTo: "/(homeTab:home/default//eventsTab:events/default//searchTab:search/default)",
+        redirectTo: "/(homeTab:home/default//eventsTab:events/default//givingTab:giving)",
         pathMatch: "full"
     },
 
@@ -23,10 +24,9 @@ const routes: Routes = [
         outlet: "eventsTab"
     },
     {
-        path: "search",
-        component: NSEmptyOutletComponent,
-        loadChildren: "~/app/search/search.module#SearchModule",
-        outlet: "searchTab"
+        path: "giving",
+        component: GivingComponent,
+        outlet: "givingTab"
     }
 ];
 
