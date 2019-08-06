@@ -22,11 +22,14 @@ export class BrowseComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.currentEvents = this.eventService.events;
+        // this.currentEvents = this.eventService.events;
+        this.eventSub = this.eventService.events.subscribe(loadedEvents => {
+            this.currentEvents = loadedEvents;
+        });
     }
 
     ngOnDestroy() {
-        // this.eventSub.unsubscribe();
+        this.eventSub.unsubscribe();
     }
 
     onItemSelected(event: CalendarEvent) {

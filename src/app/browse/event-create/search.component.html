@@ -1,0 +1,60 @@
+<ns-action-bar [title]="isCreating ? 'Create Event' : 'Edit Event'"></ns-action-bar>
+
+<ScrollView>
+  <FlexboxLayout class="form">
+
+    <StackLayout class="input-field">
+      <Label class="label" text="Title" [ngClass]="{invalid: !titleControl.valid && titleControl.touched}"></Label>
+      <TextField class="input" returnKeyType="next" required [(ngModel)]="title" #titleControl="ngModel"></TextField>
+      <Label *ngIf="!titleControl.valid && titleControl.touched" text="Please enter a title"></Label>
+    </StackLayout>
+
+    <StackLayout class="input-field">
+      <Label class="label" text="Description"
+        [ngClass]="{invalid: !descriptionControl.valid && descriptionControl.touched}"></Label>
+      <TextView class="input" returnKeyType="done" required [(ngModel)]="description" #descriptionControl="ngModel">
+      </TextView>
+      <Label *ngIf="!descriptionControl.valid && descriptionControl.touched" text="Please enter a description"></Label>
+    </StackLayout>
+
+    <StackLayout class="input-field">
+      <Label class="label" text="Location"
+        [ngClass]="{invalid: !locationControl.valid && locationControl.touched}"></Label>
+      <TextField class="input" returnKeyType="next" required [(ngModel)]="location" #locationControl="ngModel">
+      </TextField>
+      <Label *ngIf="!locationControl.valid && locationControl.touched" text="Please enter a location"></Label>
+    </StackLayout>
+
+    <StackLayout class="input-field">
+      <Label class="label" text="Date"></Label>
+      <DatePickerField hint="Tap to select" [(ngModel)]="date" #dateControl="ngModel"
+        [ngClass]="{invalid: !dateControl.valid && dateControl.touched}">
+      </DatePickerField>
+      <Label *ngIf="!dateControl.valid && dateControl.touched" text="Please enter a date"></Label>
+    </StackLayout>
+
+    <!-- Add ability to have an end date if the event spans multiple days -->
+
+    <StackLayout class="input-field">
+      <Label class="label" text="Start Time"></Label>
+      <TimePickerField hint="Tap to select" [(ngModel)]="timeStart" #timeStartControl="ngModel"
+        [ngClass]="{invalid: !timeStartControl.valid && timeStartControl.touched}" pickerTitle="Start Time">
+      </TimePickerField>
+      <Label *ngIf=" !timeStartControl.valid && timeStartControl.touched" text="Please enter a start time"></Label>
+    </StackLayout>
+
+    <StackLayout class="input-field">
+      <Label class="label" text="End Time"></Label>
+      <TimePickerField hint="Tap to select" [(ngModel)]="timeEnd" #timeEndControl="ngModel"
+        [ngClass]="{invalid: !timeEndControl.valid && timeEndControl.touched}"></TimePickerField>
+      <Label *ngIf="!timeEndControl.valid && timeEndControl.touched" text="Please enter an end time"></Label>
+    </StackLayout>
+
+    <StackLayout class="input-field">
+      <Button class="btn btn-image" text="Select Image" (tap)="pickImageTap()"></Button>
+    </StackLayout>
+    <Image [src]="imageUrl" [width]="previewSize" [height]="previewSize" stretch="aspectFit" *ngIf="imageUrl"></Image>
+
+    <Button class="btn btn-primary" text="Create Event" (tap)="submit()"></Button>
+  </FlexboxLayout>
+</ScrollView>

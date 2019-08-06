@@ -6,7 +6,7 @@ import { BrowseComponent } from "./browse.component";
 
 const routes: Routes = [
     { path: "default", component: BrowseComponent },
-    { path: 'default/:mode', loadChildren: '~/app/browse/search/search.module#SearchModule' }
+    { path: 'default/:mode', loadChildren: '~/app/browse/event-create/search.module#SearchModule' }
 ];
 
 @NgModule({

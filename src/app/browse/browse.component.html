@@ -12,7 +12,8 @@
     <ListViewLinearLayout tkListViewLayout scrollDirection="Horizontal">
     </ListViewLinearLayout>
     <ng-template tkListItemTemplate let-event="item">
-        <StackLayout class="fit-image" [backgroundImage]="event.imageUrl" (tap)="onItemSelected(event)">
+        <StackLayout class="fit-image" [backgroundImage]="event.imageUrl || event.imageAsset"
+            (tap)="onItemSelected(event)">
             <FlexboxLayout class="text-center event-content">
                 <Label class="event-context" [text]="event.title"></Label>
                 <Label [text]="event.description" textWrap="true"></Label>
