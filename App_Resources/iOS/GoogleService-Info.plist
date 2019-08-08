@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>169674814383-5lmjbt3kd9lfgp1p7pi31rtbgi7iooj8.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.169674814383-5lmjbt3kd9lfgp1p7pi31rtbgi7iooj8</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAxd2Jctk_qdBwRLRfVhpCdOpbNDBd0uVs</string>
+	<key>GCM_SENDER_ID</key>
+	<string>169674814383</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.nativescript.nsrelevantalphav2</string>
+	<key>PROJECT_ID</key>
+	<string>relevant-2b3c3</string>
+	<key>STORAGE_BUCKET</key>
+	<string>relevant-2b3c3.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:169674814383:ios:7609a251736c1544</string>
+	<key>DATABASE_URL</key>
+	<string>https://relevant-2b3c3.firebaseio.com</string>
+</dict>
+</plist>

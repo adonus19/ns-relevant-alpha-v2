@@ -4,7 +4,9 @@ import * as imagePicker from "nativescript-imagepicker";
 import { CalendarEvent } from "../event.model";
 import { ImageAsset } from "tns-core-modules/image-asset/image-asset";
 import { EventService } from "../event.service";
+
 import { fromAsset } from "tns-core-modules/image-source/image-source";
+import { path, knownFolders, File } from "tns-core-modules/file-system";
 
 @Component({
     selector: "Search",
@@ -22,6 +24,7 @@ export class SearchComponent implements OnInit {
     imageUrl: ImageAsset;
     imageBase64: string;
     previewSize = 300;
+    localFile: File;
 
     constructor(private pageRoute: PageRoute, private router: RouterExtensions,
         private eventService: EventService
@@ -46,25 +49,6 @@ export class SearchComponent implements OnInit {
         });
     }
 
-    onDayChanged(args) {
-        console.log("Day New value: " + args.value);
-        console.log("Day Old value: " + args.oldValue);
-    }
-
-    onMonthChanged(args) {
-        console.log("Month New value: " + args.value);
-        console.log("Month Old value: " + args.oldValue);
-    }
-
-    onYearChanged(args) {
-        console.log("Year New value: " + args.value);
-        console.log("Year Old value: " + args.oldValue);
-    }
-
-    onTimeChanged(args) {
-        console.log(args.value);
-    }
-
     pickImageTap() {
         const context = imagePicker.create({ mode: 'single' });
         context.authorize()
@@ -74,28 +58,39 @@ export class SearchComponent implements OnInit {
             })
             .then(selection => {
                 this.imageUrl = selection[0];
+                // TODO handle for iOS and Android. Currently only will work for iOS
+                // const ios = this.imageUrl.ios;
                 fromAsset(selection[0])
-                    .then(res => {
-                        this.imageBase64 = res.toBase64String('jpeg');
+                    .then(imgSource => {
+                        // console.log('imgSource', imgSource);
+                        this.imageBase64 = imgSource.toBase64String('jpeg');
+                        const folder = knownFolders.documents().path;
+                        const fileName = `${Date.now()}.jpeg`;
+                        const newPath = path.join(folder, fileName);
+                        const saved = imgSource.saveToFile(newPath, "jpeg");
+                        if (saved) {
+                            console.log('saved!');
+                            this.localFile = File.fromPath(newPath);
+                        }
                     });
             });
     }
 
     submit() {
-        console.log('date', this.date);
-        console.log('timeStart', this.timeStart);
-        console.log('timeEnd', this.timeEnd);
+        // console.log('date', this.date);
+        // console.log('timeStart', this.timeStart);
+        // console.log('timeEnd', this.timeEnd);
+
         const newEvent: CalendarEvent = {
             title: this.title,
             description: this.description,
             date: this.date,
             timeStart: this.timeStart,
             timeEnd: this.timeEnd,
-            location: this.location,
-            imageUrl: this.imageBase64,
-            id: "123"
+            location: this.location
         }
-        this.eventService.createEvent(newEvent);
+
+        this.eventService.createEvent(newEvent, this.localFile);
         this.router.backToPreviousPage();
     }
 }

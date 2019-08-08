@@ -7,6 +7,7 @@ import { EventDetailComponent } from "./browse/event-detail/event-detail/event-d
 import { GivingComponent } from './giving/giving.component';
 import { SharedModule } from "./shared/shared.module";
 
+
 @NgModule({
     bootstrap: [
         AppComponent

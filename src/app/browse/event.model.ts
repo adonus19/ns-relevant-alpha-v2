@@ -9,5 +9,5 @@ export interface CalendarEvent {
     location: string;
     imageUrl?: string;
     imageAsset?: ImageAsset;
-    id: string;
+    id?: string;
 }
