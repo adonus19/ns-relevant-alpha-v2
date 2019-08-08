@@ -58,19 +58,23 @@ export class SearchComponent implements OnInit {
             })
             .then(selection => {
                 this.imageUrl = selection[0];
-                // TODO handle for iOS and Android. Currently only will work for iOS
-                // const ios = this.imageUrl.ios;
+                // if any issues with android see here:
+                // https://github.com/NativeScript/nativescript-imagepicker/issues/197#issuecomment-400560349
+
                 fromAsset(selection[0])
                     .then(imgSource => {
-                        // console.log('imgSource', imgSource);
-                        this.imageBase64 = imgSource.toBase64String('jpeg');
-                        const folder = knownFolders.documents().path;
-                        const fileName = `${Date.now()}.jpeg`;
-                        const newPath = path.join(folder, fileName);
-                        const saved = imgSource.saveToFile(newPath, "jpeg");
-                        if (saved) {
-                            console.log('saved!');
-                            this.localFile = File.fromPath(newPath);
+                        if (imgSource.android) {
+                            this.localFile = File.fromPath(imgSource.android);
+                        } else {
+                            this.imageBase64 = imgSource.toBase64String('jpeg');
+                            const folder = knownFolders.documents().path;
+                            const fileName = `${Date.now()}.jpeg`;
+                            const newPath = path.join(folder, fileName);
+                            const saved = imgSource.saveToFile(newPath, "jpeg");
+                            if (saved) {
+                                console.log('saved!');
+                                this.localFile = File.fromPath(newPath);
+                            }
                         }
                     });
             });

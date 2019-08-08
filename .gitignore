@@ -35,3 +35,6 @@ typings/
 
 # firebase info
 firebase-config.ts
+
+# Google Firebase config stuff
+App_Resources/iOS/GoogleService-Info.plist
