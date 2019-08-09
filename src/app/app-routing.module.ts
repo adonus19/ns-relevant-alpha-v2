@@ -7,7 +7,7 @@ import { GivingComponent } from "./giving/giving.component";
 const routes: Routes = [
     {
         path: "",
-        redirectTo: "/(homeTab:home/default//eventsTab:events/default//givingTab:giving)",
+        redirectTo: "/(homeTab:home/default//eventsTab:events//givingTab:giving)",
         pathMatch: "full"
     },
 

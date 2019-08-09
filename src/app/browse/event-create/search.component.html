@@ -51,10 +51,15 @@
     </StackLayout>
 
     <StackLayout class="input-field">
-      <Button class="btn btn-image" text="Select Image" (tap)="pickImageTap()"></Button>
+      <Button class="btn image" text="Select Image" (tap)="pickImageTap()"></Button>
     </StackLayout>
-    <Image [src]="imageUrl" [width]="previewSize" [height]="previewSize" stretch="aspectFit" *ngIf="imageUrl"></Image>
+    <Image [src]="imageUrl" [width]="previewSize" [height]="previewSize" stretch="aspectFit"
+      *ngIf="imageUrl; else fireImage"></Image>
+    <ng-template #fireImage>
+      <Image [src]="firebaseImage" [width]="previewSize" [height]="previewSize" stretch="aspectFit"></Image>
+    </ng-template>
 
-    <Button class="btn btn-primary" text="Create Event" (tap)="submit()"></Button>
+    <Button class="btn btn-primary" [text]="isCreating ? 'Create Event' : 'Edit Event'" (tap)="submit()"></Button>
+    <Button class="btn danger" text="DELETE" (tap)="deleteEvent()" *ngIf="!isCreating"></Button>
   </FlexboxLayout>
 </ScrollView>

@@ -27,11 +27,8 @@ export class EventService {
         // }
     ];
 
+    eventToEdit: CalendarEvent = null;
     private _events = new BehaviorSubject<CalendarEvent[]>(this.loadedEvents);
-
-    // get events() {
-    //     return this.loadedEvents.slice();
-    // }
 
     get events() {
         return this._events.asObservable();
@@ -42,13 +39,16 @@ export class EventService {
         firestore.collection('events').get()
             .then(events => {
                 // console.log('Events retrieved', events.docs);
-                events.forEach(doc => {
-                    // console.log('Got doc: ', doc.data());
-                    const event = (doc.data() as CalendarEvent);
-                    event.id = doc.id;
-                    this.loadedEvents.push(event);
-                });
-                this._events.next(this.loadedEvents);
+                if (events) {
+                    this.loadedEvents = [];
+                    events.forEach(doc => {
+                        // console.log('Got doc: ', doc.data());
+                        const event = (doc.data() as CalendarEvent);
+                        event.id = doc.id;
+                        this.loadedEvents.push(event);
+                    });
+                    this._events.next(this.loadedEvents);
+                }
             })
             .catch(err => console.error('something bad happend', err));
     }
@@ -71,11 +71,12 @@ export class EventService {
                 .then(url => {
                     return firebase.firestore().collection('events').doc(eventId).update({ imageUrl: url });
                 })
-                .then(res => {
-                    console.log(`event updated with downloadURl`, res);
+                .then(() => {
+                    console.log(`event updated with downloadURl`);
+                    this.fetchCurrentEvents();
                 })
         }).catch(err => {
-            console.log(err);
+            console.error(err);
         });
     }
 
@@ -86,9 +87,40 @@ export class EventService {
                 console.log('new event created: ', docRef);
                 this.uploadImage(docRef.id, image);
             })
-            .catch(error => console.log(`error in creating event: `, error));
+            .catch(error => console.error(`error in creating event: `, error));
 
         // this.loadedEvents.push(event);
         this._events.next(this.loadedEvents);
+    }
+
+    updateEvent(event: CalendarEvent, newImage: File = null) {
+        firebase.firestore().collection('events').doc(event.id).update(event)
+            .then(res => {
+                console.log('event updated', res);
+                if (newImage) {
+                    storage.deleteFile({ remoteFullPath: `newEventImages/${event.id}` })
+                        .then(() => {
+                            console.log('old image removed');
+                            this.uploadImage(event.id, newImage);
+                        })
+                        .catch(err => console.error('issue with delete image in update event', err));
+                } else {
+                    this.fetchCurrentEvents();
+                }
+            })
+            .catch(err => console.log('error in updating event', err));
+    }
+
+    deleteEvent(event: CalendarEvent) {
+        firebase.firestore().collection('events').doc(event.id).delete()
+            .then(() => {
+                console.log('event deleted')
+                return storage.deleteFile({ remoteFullPath: `newEventImages/${event.id}` })
+            })
+            .then(() => {
+                console.log('image deleted');
+                this.fetchCurrentEvents();
+            })
+            .catch(error => console.error('error in delete event', error));
     }
 }

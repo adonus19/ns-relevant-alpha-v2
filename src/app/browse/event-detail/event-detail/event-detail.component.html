@@ -1,7 +1,3 @@
-<ActionBar class="action-bar">
-  <Label class="action-bar-title" text="Event Detail"></Label>
-</ActionBar>
-
 <FlexboxLayout [backgroundImage]="eventDetails.imageUrl">
   <StackLayout class="text-center">
     <Label class="event-title" [text]="eventDetails.title" textWrap="true"></Label>
@@ -12,4 +8,5 @@
     <Label [text]="eventDetails.date | date" textWrap="true"></Label>
   </StackLayout>
   <Button class="btn btn-primary" text="Close" (tap)="closeModal()"></Button>
+  <Button class="btn btn-edit" text="Edit" (tap)="editEvent()"></Button>
 </FlexboxLayout>

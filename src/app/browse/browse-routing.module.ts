@@ -5,12 +5,12 @@ import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { BrowseComponent } from "./browse.component";
 
 const routes: Routes = [
-    { path: "default", component: BrowseComponent },
-    { path: 'default/:mode', loadChildren: '~/app/browse/event-create/search.module#SearchModule' }
+    { path: "", component: BrowseComponent },
+    { path: ':mode', loadChildren: '~/app/browse/event-create/search.module#SearchModule' }
 ];
 
 @NgModule({
-    imports: [NativeScriptRouterModule.forChild(routes)],
+    imports: [NativeScriptRouterModule, NativeScriptRouterModule.forChild(routes)],
     exports: [NativeScriptRouterModule]
 })
 export class BrowseRoutingModule { }

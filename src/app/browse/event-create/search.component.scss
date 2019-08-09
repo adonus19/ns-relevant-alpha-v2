@@ -1,9 +1,14 @@
-@import 'app-variables';
+@import '../../../app-variables';
 
 .content {
   font-weight: bold;
 }
 
-.btn-image {
+.image {
   background: $success-dark;
+}
+
+.danger {
+  background: $error-dark;
+  color: white;
 }

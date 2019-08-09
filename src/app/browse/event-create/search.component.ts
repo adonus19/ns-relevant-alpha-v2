@@ -11,7 +11,8 @@ import { path, knownFolders, File } from "tns-core-modules/file-system";
 @Component({
     selector: "Search",
     moduleId: module.id,
-    templateUrl: "./search.component.html"
+    templateUrl: "./search.component.html",
+    styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
     isCreating = true;
@@ -22,9 +23,10 @@ export class SearchComponent implements OnInit {
     timeEnd: number;
     location: string;
     imageUrl: ImageAsset;
-    imageBase64: string;
+    firebaseImage: string;
     previewSize = 300;
     localFile: File;
+    eventToEdit: CalendarEvent;
 
     constructor(private pageRoute: PageRoute, private router: RouterExtensions,
         private eventService: EventService
@@ -43,9 +45,19 @@ export class SearchComponent implements OnInit {
                 if (!params.has('mode')) {
                     this.isCreating = true;
                 } else {
-                    this.isCreating = params.get('mode') !== 'edit';
+                    this.isCreating = params.get('mode') !== 'create';
                 }
-            })
+                if (!this.isCreating) {
+                    this.eventToEdit = this.eventService.eventToEdit;
+                    this.title = this.eventToEdit.title;
+                    this.description = this.eventToEdit.description;
+                    this.date = this.eventToEdit.date;
+                    this.timeStart = this.eventToEdit.timeStart;
+                    this.timeEnd = this.eventToEdit.timeEnd;
+                    this.location = this.eventToEdit.location;
+                    this.firebaseImage = this.eventToEdit.imageUrl;
+                }
+            });
         });
     }
 
@@ -66,7 +78,6 @@ export class SearchComponent implements OnInit {
                         if (imgSource.android) {
                             this.localFile = File.fromPath(imgSource.android);
                         } else {
-                            this.imageBase64 = imgSource.toBase64String('jpeg');
                             const folder = knownFolders.documents().path;
                             const fileName = `${Date.now()}.jpeg`;
                             const newPath = path.join(folder, fileName);
@@ -93,8 +104,17 @@ export class SearchComponent implements OnInit {
             timeEnd: this.timeEnd,
             location: this.location
         }
+        if (!this.isCreating) {
+            newEvent.id = this.eventToEdit.id;
+            this.eventService.updateEvent(newEvent, this.localFile);
+        } else {
+            this.eventService.createEvent(newEvent, this.localFile);
+        }
+        this.router.backToPreviousPage();
+    }
 
-        this.eventService.createEvent(newEvent, this.localFile);
+    deleteEvent() {
+        this.eventService.deleteEvent(this.eventToEdit);
         this.router.backToPreviousPage();
     }
 }
