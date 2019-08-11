@@ -7,7 +7,7 @@ import { GivingComponent } from "./giving/giving.component";
 const routes: Routes = [
     {
         path: "",
-        redirectTo: "/(homeTab:home/default//eventsTab:events//givingTab:giving)",
+        redirectTo: "/(homeTab:home/default//eventsTab:events//givingTab:giving//contactTab:contact)",
         pathMatch: "full"
     },
 
@@ -27,6 +27,11 @@ const routes: Routes = [
         path: "giving",
         component: GivingComponent,
         outlet: "givingTab"
+    },
+    {
+        path: "contact",
+        loadChildren: "~/app/contact/contact.module#ContactModule",
+        outlet: "contactTab"
     }
 ];
 

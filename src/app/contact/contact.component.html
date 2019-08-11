@@ -1,0 +1,15 @@
+<ns-action-bar title="Connect"></ns-action-bar>
+
+<ScrollView>
+  <StackLayout padding="4">
+    <CardView ripple="true" margin="6" class="cardStyle">
+      <FlexboxLayout class="form" [formGroup]="form">
+        <StackLayout class="input-field">
+          <Label class="label" text="Let us know how we can pray for you"></Label>
+          <TextView class="body" formControlName="request" textWrap="true"></TextView>
+        </StackLayout>
+        <Button class="btn btn-primary" text="Send" (tap)="sendEmail()"></Button>
+      </FlexboxLayout>
+    </CardView>
+  </StackLayout>
+</ScrollView>

@@ -60,6 +60,13 @@ ActionBar .action-bar-title {
       color: black;
     }
 
+    .body {
+      border: 1 solid $accent-light;
+      border-bottom-color: $accent-light;
+      width: 100%;
+      color: black;
+    }
+
     .input.ng-invalid.ng-touched {
       border-bottom-color: red;
       color: red;

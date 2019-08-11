@@ -38,3 +38,4 @@ firebase-config.ts
 
 # Google Firebase config stuff
 App_Resources/iOS/GoogleService-Info.plist
+functions/src/info.ts

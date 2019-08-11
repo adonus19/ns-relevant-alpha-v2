@@ -1,0 +1,19 @@
+/* Add mobile styles for the component here.  */
+@import '../../app-variables';
+
+Page {
+  background-color: rgb(237, 237, 237);
+}
+
+.cardStyle {
+    background-color: #fff;
+    color: rgb(43, 43, 43);
+}
+
+TextView {
+  border-color: $accent-light;
+  border-width: 1;
+  border-radius: 10px;
+  width: 100%;
+  color: black;
+}
