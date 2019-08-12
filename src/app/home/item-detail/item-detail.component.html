@@ -10,8 +10,7 @@
 <ScrollView>
     <StackLayout>
 
-        <VideoPlayer id="nativeVideoPlayer" controls="true" autoplay="true" height="280"
-            src="https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4">
+        <VideoPlayer id="nativeVideoPlayer" controls="true" autoplay="true" height="280" [src]="item.link">
         </VideoPlayer>
         <Button class="btn btn-primary" text="Play" (tap)="play()"></Button>
         <Button class="btn btn-primary" text="Pause" (tap)="pause()"></Button>

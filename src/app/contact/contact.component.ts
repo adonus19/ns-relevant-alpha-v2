@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { TextField } from 'tns-core-modules/ui/text-field';
 import { registerElement } from 'nativescript-angular/element-registry';
 import { CardView } from '@nstudio/nativescript-cardview';
 registerElement('CardView', () => CardView);
@@ -14,6 +15,8 @@ import * as firebase from "nativescript-plugin-firebase/app";
 export class ContactComponent implements OnInit {
     emailAvailable = false;
     form: FormGroup;
+    isSending: boolean;
+    @ViewChild('prayerEl', { static: true }) prayerEl: ElementRef<TextField>;
 
     constructor() { }
 
@@ -24,27 +27,38 @@ export class ContactComponent implements OnInit {
     }
 
     sendEmail() {
-        // console.log('about to init email');
-        // email.available().then((avail: boolean) => {
-        //     this.emailAvailable = avail;
-        //     console.log('987349872349872348ajhasdf;ljhasdflkjhsad@#$', avail);
-        //     if (this.emailAvailable) {
-        //         email.compose({
-        //             subject: 'Test',
-        //             body: 'This email was sent from the app!',
-        //             to: ['daniel.j.pogue@gmail.com']
-        //         }).then(() => {
-        //             console.log('hopefully the email was sent!');
-        //         }).catch(err => console.error('Something went wrong with email!', err));
-        //     }
-        // });
+        this.isSending = true;
+        this.prayerEl.nativeElement.dismissSoftInput();
         console.log(`email button pressed! About to send email`)
         console.log(this.form.get('request').value);
         const cloudFunction = firebase.functions().httpsCallable('sendMail');
         cloudFunction(this.form.get('request').value)
             .then(res => {
+                this.isSending = false;
+                this.form.reset();
                 console.log('here is what came back: ', res);
-            }).catch(err => console.error('email error: ', err));
+                /* --- Log of what to expect on return --- */
+                // const sample = {
+                //     "messageId": "<503198cb-7115-e837-f21b-7fc9517c5693@gmail.com>",
+                //     "envelopeTime": 49,
+                //     "rejected": [],
+                //     "messageSize": 304,
+                //     "envelope": {
+                //         "to": [
+                //             "daniel.j.pogue@gmail.com"
+                //         ],
+                //         "from": "relevant.app.mule@gmail.com"
+                //     },
+                //     "messageTime": 533,
+                //     "response": "250 2.0.0 OK  1565570231 a7sm81398080iok.19 - gsmtp",
+                //     "accepted": [
+                //         "daniel.j.pogue@gmail.com"
+                //     ]
+                // }
+            }).catch(err => {
+                this.isSending = false;
+                console.error('email error: ', err)
+            });
     }
 
 

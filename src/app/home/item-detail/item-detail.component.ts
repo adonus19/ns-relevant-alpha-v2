@@ -28,6 +28,7 @@ export class ItemDetailComponent implements OnInit {
     ngOnInit(): void {
         const name = this._route.snapshot.params.name;
         this.item = this._data.getItem(name);
+        console.log('checking the video src', this.item);
     }
 
     ngAfterViewInit() {

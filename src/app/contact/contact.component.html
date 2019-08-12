@@ -6,9 +6,10 @@
       <FlexboxLayout class="form" [formGroup]="form">
         <StackLayout class="input-field">
           <Label class="label" text="Let us know how we can pray for you"></Label>
-          <TextView class="body" formControlName="request" textWrap="true"></TextView>
+          <TextView class="body" formControlName="request" textWrap="true" returnKeyType="done" #prayerEl></TextView>
         </StackLayout>
         <Button class="btn btn-primary" text="Send" (tap)="sendEmail()"></Button>
+        <ActivityIndicator [busy]="isSending"></ActivityIndicator>
       </FlexboxLayout>
     </CardView>
   </StackLayout>

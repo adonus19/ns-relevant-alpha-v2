@@ -25,7 +25,6 @@ let transporter = nodemailer.createTransport({
 
 exports.sendMail = functions.https.onRequest((req, res) => {
     cors(req, res, () => {
-        console.log('Making sure this is mapped right', req.body.data);
 
         // getting dest email by query string
         // const dest = req.query.dest;
@@ -38,12 +37,13 @@ exports.sendMail = functions.https.onRequest((req, res) => {
         };
 
         // returning result
-        return transporter.sendMail(mailOptions, (erro: any, info: any) => {
-            if (erro) {
-                return res.send(erro.toString());
+        return transporter.sendMail(mailOptions, (err: any, info: any) => {
+            if (err) {
+                console.log(`An error occurred: `, err)
+                return res.send(err.toString());
             }
-            console.log(info);
-            return res.send('email sent!');
+            console.log('All is well! Here is what happened: ', info);
+            return res.send({ data: info });
         });
     });
 });
