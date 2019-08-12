@@ -88,3 +88,10 @@ ActionBar .action-bar-title {
   border-radius: 25;
   width: 50%;
 }
+
+.btn-flat {
+  background: transparent;
+  border-color: transparent;
+  border-width: 1;
+  color: $primary;
+}

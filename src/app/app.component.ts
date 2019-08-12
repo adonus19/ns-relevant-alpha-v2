@@ -4,6 +4,7 @@ import { UIService } from "./shared/ui.service";
 
 import * as firebase from 'nativescript-plugin-firebase';
 import { EventService } from "./browse/event.service";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
     selector: "ns-app",
@@ -14,7 +15,7 @@ import { EventService } from "./browse/event.service";
 export class AppComponent implements OnInit {
 
     constructor(private vcRef: ViewContainerRef, private uiService: UIService,
-        private eventService: EventService
+        private eventService: EventService, private active: ActivatedRoute
     ) {
         // Use the component constructor to inject providers.
     }
@@ -33,6 +34,7 @@ export class AppComponent implements OnInit {
             });
 
         this.uiService.setRootVCRef(this.vcRef);
+        console.log('app.component: ', this.active);
     }
 
     getIconSource(icon: string): string {

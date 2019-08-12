@@ -6,8 +6,11 @@ import { HomeComponent } from "./home.component";
 import { ItemDetailComponent } from "./item-detail/item-detail.component";
 
 const routes: Routes = [
-    { path: "default", component: HomeComponent },
-    { path: "sermon/:name", component: ItemDetailComponent }
+    {
+        path: "default", component: HomeComponent
+    },
+    { path: "sermon/:name", component: ItemDetailComponent },
+    { path: '', redirectTo: 'default', pathMatch: 'full' }
 ];
 
 @NgModule({

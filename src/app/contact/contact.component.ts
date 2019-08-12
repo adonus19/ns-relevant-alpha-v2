@@ -26,6 +26,10 @@ export class ContactComponent implements OnInit {
         });
     }
 
+    onDone() {
+        this.prayerEl.nativeElement.dismissSoftInput();
+    }
+
     sendEmail() {
         this.isSending = true;
         this.prayerEl.nativeElement.dismissSoftInput();

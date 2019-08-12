@@ -47,3 +47,18 @@ exports.sendMail = functions.https.onRequest((req, res) => {
         });
     });
 });
+
+exports.addAdmin = functions.https.onCall((email: string, context) => {
+    console.log('data received => ', email);
+    return admin.auth().getUserByEmail(email)
+        .then((user: any) => {
+            return admin.auth().setCustomUserClaims(user.uid, { admin: true });
+        })
+        .then(() => {
+            return { message: `${email} is now an admin!` };
+        })
+        .catch((err: any) => {
+            console.log('error happend in addAdmin', err);
+            return err;
+        });
+});

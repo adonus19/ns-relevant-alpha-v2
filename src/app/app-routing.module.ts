@@ -3,11 +3,12 @@ import { Routes } from "@angular/router";
 import { NSEmptyOutletComponent } from "nativescript-angular";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { GivingComponent } from "./giving/giving.component";
+import { AuthComponent } from "./auth/auth.component";
 
 const routes: Routes = [
     {
         path: "",
-        redirectTo: "/(homeTab:home/default//eventsTab:events//givingTab:giving//contactTab:contact)",
+        redirectTo: "/(homeTab:home/default//eventsTab:events//givingTab:giving//contactTab:contact//authTab:auth)",
         pathMatch: "full"
     },
 
@@ -32,6 +33,9 @@ const routes: Routes = [
         path: "contact",
         loadChildren: "~/app/contact/contact.module#ContactModule",
         outlet: "contactTab"
+    },
+    {
+        path: 'auth', component: AuthComponent, outlet: 'authTab'
     }
 ];
 
