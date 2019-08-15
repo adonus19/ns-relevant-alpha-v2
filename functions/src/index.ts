@@ -7,9 +7,11 @@ import * as functions from 'firebase-functions';
 //  response.send("Hello from Firebase!");
 // });
 
-const admin = require('firebase-admin');
+// const admin = require('firebase-admin');
 const nodemailer = require('nodemailer');
 const cors = require('cors')({ origin: true });
+
+import * as admin from 'firebase-admin';
 admin.initializeApp();
 
 /**

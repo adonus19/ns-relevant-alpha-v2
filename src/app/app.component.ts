@@ -21,7 +21,14 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        firebase.init()
+        firebase.init({
+            onMessageReceivedCallback: (message) => {
+                console.log(`Title: ${message.title}`);
+                console.log(`Body: ${message.body}`);
+                // if your server passed a custom property called 'foo', then do this:
+                console.log(`Value of 'foo': ${message.data.foo}`);
+            }
+        })
             .then(() => {
                 console.log(`Connected!`);
                 this.eventService.fetchCurrentEvents();
